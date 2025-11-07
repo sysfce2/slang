@@ -1999,7 +1999,7 @@ static int compile_byte_compiled_multistring (char *buf)
 	if ((last_type != type) && (type != 0))
 	  {
 	     SLang_verror (SL_INVALID_DATA_ERROR, "Unexpected object (0x%X) encountered in stream", (int)this_type);
-	     return -1;
+	     goto return_error;
 	  }
 	type = last_type;
 

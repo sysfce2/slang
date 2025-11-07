@@ -40,6 +40,11 @@ sh_read_ldsoconf ()
 EOF
      if test "$p1" = "include"
      then
+       ch=`sh_substr "$p2" 1 1`
+       if test "X$ch" != "X/"
+       then
+         p2="/etc/$p2"
+       fi
        for file in $p2
        do
          dirs=`sh_read_ldsoconf "$file"`
@@ -53,6 +58,11 @@ EOF
 }
 
 dirs=`sh_read_ldsoconf "/etc/ld.so.conf"`
+if test -d "/usr/lib64"
+then
+  dirs="$dirs /usr/lib64"
+fi
+
 XY=""
 for Y in $dirs
 do

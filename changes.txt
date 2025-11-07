@@ -33,6 +33,18 @@ Changes since 2.3.3
     fcntl_setpipe_sz functions to get and set the buffer size for pipes
 15. src/sltoken.c, modules/json-module.c: Added UTF-16 surrogate handling to the
     expand_escaped_string function and json module
+16. src/{keymap.c,sltoken.c}: Removed unnecessary chack for a NULL
+    string, and corrected a potential memory leak (Miroslav Lichvar)
+17. autoconf/scripts/getsyslibs.sh: Handle files with relative path
+    names
+18. src/slconfig.h: Do not define HAVE_FLOCK for VMS systems (Hartmut
+    Becker)
+19. Misc updates:
+    * timestamp.sl: In a comment, mispelled Australian (Klaus Alexander Seistrup)
+    * modules/tm/Makefile: fcntlfuns.hlp was not getting installed
+    * utf8/tools/mktables: Added some comments/usage, changed to use slsh_main
+    * src/sltermin.c: Added a comment
+20. configure: Typo: -export-dynamic --> --export-dynamic (Sam James)
 
 {{{ Previous Versions
 

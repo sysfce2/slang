@@ -677,6 +677,7 @@ char *_pSLtt_tigetstr (SLterminfo_Type *t, SLCONST char *cap)
    offset = compute_cap_offset (cap, t, Tgetstr_Map, t->num_string_offsets);
    if (offset < 0) return NULL;
    offset = make_integer16 (t->string_offsets + 2 * offset);
+   /* Note: If offset is -2, cap is cancelled; if -1, cap is absent (ncurses) */
    if (offset < 0) return NULL;
    return t->string_table + offset;
 }

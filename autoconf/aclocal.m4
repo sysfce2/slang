@@ -1,6 +1,7 @@
 dnl# -*- mode: sh; mode: fold -*-
-dnl# 0.3.4.1: Added /{lib,etc}/terminfo to terminfo directory list
-dnl# 0.3.4.0: Added $(CPPFLAGS)
+dnl# 0.3.4-2: Use --export-dynamic instead of -export-dynamic
+dnl# 0.3.4-1: Added /{lib,etc}/terminfo to terminfo directory list
+dnl# 0.3.4-0: Added $(CPPFLAGS)
 dnl# 0.3.3-1: Use INSTALL instead of INSTALL_DATA to install modules to get executable permissions
 dnl# 0.3.3-0: Added $(OBJ_O_DEPS) and $(ELF_O_DEPS) to PROGRAM_OBJECT_RULES
 dnl# 0.3.2-0: Add rpath support for freebsd
@@ -617,7 +618,7 @@ M_LIB="-lm"
 
 case "$host_os" in
   *linux*|*gnu*|k*bsd*-gnu )
-    DYNAMIC_LINK_FLAGS="-Wl,-export-dynamic"
+    DYNAMIC_LINK_FLAGS="-Wl,--export-dynamic"
     ELF_CC="\$(CC)"
     ELF_CFLAGS="\$(CFLAGS) \$(CPPFLAGS) -fPIC"
     ELF_LINK="\$(CC) \$(LDFLAGS) -shared -Wl,-O1 -Wl,--version-script,\$(VERSION_SCRIPT) -Wl,-soname,\$(ELFLIB_MAJOR)"
@@ -722,7 +723,7 @@ case "$host_os" in
     SLANG_DLL_CFLAGS="-DSLANG_DLL=1"
     ELF_CFLAGS="\$(CFLAGS) \$(CPPFLAGS) -DBUILD_DLL=1"
     DLL_IMPLIB_NAME="lib\$(THIS_LIB)\$(ELFLIB_MAJOR_VERSION).dll.a"
-    #ELF_LINK="\$(CC) \$(LDFLAGS) -shared -Wl,-O1 -Wl,--version-script,\$(VERSION_SCRIPT) -Wl,-soname,\$(ELFLIB_MAJOR) -Wl,--out-implib=\$(DLL_IMPLIB_NAME) -Wl,-export-all-symbols -Wl,-enable-auto-import"
+    #ELF_LINK="\$(CC) \$(LDFLAGS) -shared -Wl,-O1 -Wl,--version-script,\$(VERSION_SCRIPT) -Wl,-soname,\$(ELFLIB_MAJOR) -Wl,--out-implib=\$(DLL_IMPLIB_NAME) -Wl,--export-all-symbols -Wl,-enable-auto-import"
     ELF_LINK="\$(CC) \$(LDFLAGS) -shared -Wl,-O1 -Wl,--version-script,\$(VERSION_SCRIPT) -Wl,-soname,\$(ELFLIB_MAJOR) -Wl,--out-implib=\$(DLL_IMPLIB_NAME)"
     ELF_DEP_LIBS="\$(DL_LIB) -lm"
     CC_SHARED_FLAGS="-shared -DSLANG_DLL=1"
@@ -739,7 +740,7 @@ case "$host_os" in
     ;;
   *haiku* )
     M_LIB=""
-    DYNAMIC_LINK_FLAGS="-Wl,-export-dynamic"
+    DYNAMIC_LINK_FLAGS="-Wl,--export-dynamic"
     ELF_CC="\$(CC)"
     ELF_CFLAGS="\$(CFLAGS) \$(CPPFLAGS) -fPIC"
     ELF_LINK="\$(CC) \$(LDFLAGS) -shared -Wl,-O1 -Wl,--version-script,\$(VERSION_SCRIPT) -Wl,-soname,\$(ELFLIB_MAJOR)"

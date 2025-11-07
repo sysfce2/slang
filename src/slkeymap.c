@@ -335,7 +335,7 @@ static int find_the_key (SLFUTURE_CONST char *s, SLkeymap_Type *kml, SLang_Key_T
 	last = key;
 	key = key->next;
 
-	if ((key != NULL) && (key->str != NULL))
+	if (key != NULL)
 	  {
 	     len = key_len = key->str[0];
 	     if (len > str_len) len = str_len;

@@ -43,9 +43,9 @@ TZMap["MSK"] = 300;		       % Moscow
 TZMap["HKT"] = 800;		       % Hong Kong   
 TZMap["JST"] = 900;		       % Japan Standard   
 TZMap["KST"] = 900;		       % Korean Standard   
-TZMap["CAST"] = 930;		       % Central Autsralian   
-TZMap["EAST"] = 1000;		       % Eastern Autsralian   
-TZMap["NZST"] = 1200;		       % New Zealand Autsralian   
+TZMap["CAST"] = 930;		       % Central Australian
+TZMap["EAST"] = 1000;		       % Eastern Australian   
+TZMap["NZST"] = 1200;		       % New Zealand Australian
 
 private define map_tzstr_string (tzstr)
 {

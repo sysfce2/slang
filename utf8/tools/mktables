@@ -1,18 +1,6 @@
 #!/usr/bin/env slsh
 % The unicode database contains 15 fields
 
-private define usage ()
-{
-   () = fprintf (stderr, "Usage: %s UnicodeData.txt EastAsianWidth.txt\n", __argv[0]);
-   exit (1);
-}
-
-if (__argc != 3)
-  usage ();
-
-private variable Unicode_Data_File = __argv[1];
-private variable East_Asian_File = __argv[2];
-
 private define make_char_def_table (num)
 {
    variable s = struct
@@ -20,9 +8,9 @@ private define make_char_def_table (num)
 	code_point,
 	char_name,
 	general_cat,
-	combining_class,
+	combining_class,	       %  Used to sort combining chars when normalizing
 	bidirectional_cat,
-	char_decomp_map,
+	char_decomp_map,	       %  Used to compose the character from the listed values
 	decimal_digit_val,
 	digit_val,
 	numeric_val,
@@ -587,10 +575,22 @@ private define write_char_classes (file, s, char_classes)
 		      "Classification", Classification_C_Table_Format, 8, 0);
 }
 
-private define main ()
+private define exit_usage ()
 {
-   variable s = read_file (Unicode_Data_File);
-   read_east_asian_file (s, East_Asian_File);
+   () = fprintf (stderr, "Usage: %s UnicodeData.txt EastAsianWidth.txt\n", __argv[0]);
+   exit (1);
+}
+
+define slsh_main ()
+{
+   if (__argc != 3)
+     exit_usage ();
+
+   variable unicode_data_file = __argv[1];
+   variable east_asian_file = __argv[2];
+
+   variable s = read_file (unicode_data_file);
+   read_east_asian_file (s, east_asian_file);
 
    variable char_classes = make_char_classes (s);
    variable ch = s.code_point;
@@ -634,5 +634,3 @@ private define main ()
    write_char_classes ("slischar.h", s, char_classes);
 
 }
-
-main();
